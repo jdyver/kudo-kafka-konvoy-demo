@@ -116,11 +116,11 @@ zk-zookeeper-2                         1/1     Running   0          9m11s
 
 Then, follow the logs for the consumer or generator pods to show reading/writing to Kafka.
 ```
-kubectl logs $(kubectl get pods | grep consumer | awk '{print $1}')  --tail=5 --follow
+kubectl logs $(kubectl get pods | grep consumer | awk '{print $1}') --tail=5 --follow
 ```
 ...or copy / paste the exact service name above into the below command
 ```
-k logs kudo-kafka-consumer-85d8cd54df-7nhnn  --tail=5 --follow
+k logs kudo-kafka-consumer-85d8cd54df-7nhnn --tail=5 --follow
 
 Message: b'2019-06-21T16:18:20Z;5;0;3072'
 Message: b'2019-06-21T16:18:29Z;2;4;9296'
