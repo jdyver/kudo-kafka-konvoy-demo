@@ -41,11 +41,43 @@ Use `kubectl get pods` to observe when all the ZK nodes are up and have STATUS `
 kubectl kudo install kafka --instance=kafka --parameter ZOOKEEPER_URI=zk-zookeeper-0.zk-hs:2181,zk-zookeeper-1.zk-hs:2181,zk-zookeeper-2.zk-hs:2181 --parameter ZOOKEEPER_PATH=/small -p BROKERS_COUNTER=3
 ```
 
-Use `kubectl get pods` to observe when all the Kafka brokers are up and have STATUS `RUNNING`.
+Use `kubectl get pods` to observe when all the Kafka brokers are up and have STATUS `RUNNING`.  (Very slow to come up)
 
 
 ## Step 5 - Deploy Generator and Consumer
 
+Update generator and consumer yamls with broker IP
+```
+ $ kubectl describe svc kafka-svc
+Name:              kafka-svc
+Namespace:         default
+
+...
+
+Port:              server  9093/TCP
+kind: Deployment
+TargetPort:        9093/TCP
+Endpoints:         192.168.170.203:9093,192.168.185.141:9093,192.168.253.142:9093
+Port:              client  9092/TCP
+
+...
+```
+- From example above pull 192.168.170.203 and update BOTH yamls
+```
+ $ cat kafka-demo-generator-kudo.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: kudo-kafka-generator
+  
+...
+
+        imagePullPolicy: Always
+        args: ["--broker", "192.168.170.203:9093"]
+# kubectl describe svc kafka-svc
+```
+
+Now deploy
 ```
 kubectl apply -f kafka-demo-generator-kudo.yaml
 kubectl apply -f kafka-demo-consumer-kudo.yaml
