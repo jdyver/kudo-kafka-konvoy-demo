@@ -48,6 +48,10 @@ Use `kubectl get pods` to observe when all the Kafka brokers are up and have STA
 
 Update generator and consumer yamls with broker IP
 ```
+ $ TEMPIP=$(kubectl describe svc kafka-svc | grep Endpoints | grep 9093 | awk '{print $2}' | cut -f1 -d :); sed -i -e "s/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/$TEMPIP/g" kafka-demo-*; rm *-e
+```
+...or work for it file by file as below (unneccessary if you ran the above command)
+```
  $ kubectl describe svc kafka-svc
 Name:              kafka-svc
 Namespace:         default
@@ -72,9 +76,17 @@ metadata:
   
 ...
 
-        imagePullPolicy: Always
         args: ["--broker", "192.168.170.203:9093"]
-# kubectl describe svc kafka-svc
+        
+ $ cat kafka-demo-consumer-kudo.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+ name: kudo-kafka-consumer
+
+...
+
+          value: 192.168.170.203:9093
 ```
 
 Now deploy
