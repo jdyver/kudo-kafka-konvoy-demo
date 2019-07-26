@@ -104,18 +104,23 @@ Run `kubectl get pods` to find the pod ID of the pods for the generator and cons
 k get pods
 
 NAME                                    READY   STATUS    RESTARTS   AGE
-kafka-kafka-0                           1/1     Running   1          5h10m
-kudo-kafka-consumer-77cdd9559f-h8rcs    1/1     Running   0          119s
-kudo-kafka-generator-5c8f4784dc-vgxh9   1/1     Running   0          116s
-zk-zk-0                                 1/1     Running   0          5h10m
-zk-zk-1                                 1/1     Running   0          5h10m
-zk-zk-2                                 1/1     Running   0          5h10m
+kafka-kafka-0                          1/1     Running   0          76m
+kafka-kafka-1                          1/1     Running   0          76m
+kafka-kafka-2                          1/1     Running   0          75m
+kudo-kafka-consumer-85d8cd54df-7nhnn   1/1     Running   0          61m
+kudo-kafka-generator-bfbfbc749-rf7tz   1/1     Running   0          64m
+zk-zookeeper-0                         1/1     Running   0          7m21s
+zk-zookeeper-1                         1/1     Running   0          8m18s
+zk-zookeeper-2                         1/1     Running   0          9m11s
 ```
 
 Then, follow the logs for the consumer or generator pods to show reading/writing to Kafka.
-
 ```
-k logs kudo-kafka-consumer-77cdd9559f-h8rcs --follow
+kubectl logs $(kubectl get pods | grep consumer | awk '{print $1}') --follow
+```
+...or copy / paste the exact service name above into the below command
+```
+k logs kudo-kafka-consumer-85d8cd54df-7nhnn --follow
 
 Message: b'2019-06-21T16:18:20Z;5;0;3072'
 Message: b'2019-06-21T16:18:29Z;2;4;9296'
