@@ -152,8 +152,8 @@ kubectl create -f https://raw.githubusercontent.com/kudobuilder/operators/master
 
 Open Grafana from the Konvoy Ops Portal.
 
-On the left nav bar, hover over the "+" icon, and select "Import". 
+On the left nav bar, hover over the "+" icon and select "Import". 
 
 The JSON for the Kafka dashboard can be found [here](https://raw.githubusercontent.com/kudobuilder/operators/master/repository/kafka/docs/v0.1/resources/grafana-dashboard.json).
 
-Then select the 'Prometheus' metrics in the drop down at the bottom.
+Then select the 'Prometheus' option in the drop down at the bottom and select "Import".
