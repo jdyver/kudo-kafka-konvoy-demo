@@ -154,6 +154,5 @@ Open Grafana from the Konvoy Ops Portal.
 
 On the left nav bar, hover over the "+" icon and select "Import". 
 
-The JSON for the Kafka dashboard can be found [here]
-(https://raw.githubusercontent.com/kudobuilder/operators/master/repository/kafka/docs/v0.2/resources/grafana-dashboard.json).
+The JSON for the Kafka dashboard can be found [here](https://raw.githubusercontent.com/kudobuilder/operators/master/repository/kafka/docs/v0.2/resources/grafana-dashboard.json).
 Then select the 'Prometheus' option in the drop down at the bottom and select "Import".
